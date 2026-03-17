@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spartan Sports Media | White Station High School</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green: #1B6B2E;
+  --green-mid: #2A8A40;
+  --green-light: #3AAD55;
+  --green-pale: #E8F5EC;
+  --green-bg: #F2FAF4;
+  --gold: #C8962A;
+  --gold-light: #F0C84A;
+  --charcoal: #1A1A1A;
+  --white: #FFFFFF;
+  --gray: #6B7280;
+  --light-border: #C8E6CF;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Nunito', sans-serif; background: var(--green-bg); color: var(--charcoal); }
+
+/* NAV */
+nav {
+  background: var(--green);
+  padding: 0.9rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.nav-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+.nav-logo-circle {
+  width: 42px; height: 42px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nav-logo-circle svg { width: 36px; height: 36px; }
+.nav-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.45rem;
+  color: var(--white);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.nav-title span { color: var(--gold-light); }
+.nav-links { display: flex; gap: 1.75rem; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+.nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+
+/* HAMBURGER */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.2s; }
+.mobile-menu {
+  display: none;
+  background: #0f3d1a;
+  padding: 1rem 2rem;
+  flex-direction: column;
+  gap: 0;
+}
+.mobile-menu a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: block;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu.open { display: flex; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(150deg, #0f3d1a 0%, var(--green) 60%, #1e8035 100%);
+  padding: 5.5rem 2rem 4.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(200,150,42,0.18) 0%, transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-glow2 {
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-logo {
+  width: 110px; height: 110px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.75rem;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.35);
+  position: relative; z-index: 1;
+}
+.hero-logo svg { width: 92px; height: 92px; }
+.hero-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 0.75rem;
+  position: relative; z-index: 1;
+  font-weight: 600;
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.2rem, 10vw, 6rem);
+  color: var(--white);
+  letter-spacing: 5px;
+  line-height: 0.95;
+  margin-bottom: 1.1rem;
+  position: relative; z-index: 1;
+}
+.hero-title span { color: var(--gold-light); }
+.hero-subtitle {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.68);
+  font-weight: 400;
+  margin-bottom: 2.75rem;
+  letter-spacing: 1px;
+  position: relative; z-index: 1;
+}
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+.btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 0.9rem 2.5rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-outline {
+  display: inline-block;
+  border: 2px solid rgba(255,255,255,0.5);
+  color: var(--white);
+  padding: 0.9rem 2.5rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); transform: translateY(-1px); }
+
+/* STATS BAR */
+.stats-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--light-border);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--green);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* SECTIONS */
+section { padding: 5rem 2rem; }
+.section-label {
+  font-size: 0.72rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.6rem;
+  letter-spacing: 2px;
+  color: var(--charcoal);
+  margin-bottom: 0.75rem;
+}
+.divider {
+  width: 50px; height: 3px;
+  background: var(--green-mid);
+  margin-bottom: 2.25rem;
+  border-radius: 2px;
+}
+
+/* ABOUT */
+.about { background: var(--white); }
+.about-inner { max-width: 860px; margin: 0 auto; }
+.about-body {
+  font-size: 1.05rem;
+  color: var(--gray);
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+}
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.about-card {
+  background: var(--green-pale);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border-left: 4px solid var(--green-mid);
+  transition: transform 0.2s;
+}
+.about-card:hover { transform: translateY(-2px); }
+.about-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+.about-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; }
+
+/* SCHEDULE */
+.schedule { background: var(--green-bg); }
+.schedule-inner { max-width: 1000px; margin: 0 auto; }
+
+.filter-label {
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gray);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.sport-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+.tab-btn {
+  padding: 0.55rem 1.3rem;
+  border: 2px solid var(--green-mid);
+  background: var(--white);
+  color: var(--green-mid);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab-btn:hover { background: var(--green-pale); }
+.tab-btn.active {
+  background: var(--green-mid);
+  color: var(--white);
+  box-shadow: 0 3px 10px rgba(42,138,64,0.35);
+}
+.tab-count {
+  background: rgba(0,0,0,0.12);
+  color: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+.tab-btn.active .tab-count { background: rgba(255,255,255,0.25); }
+
+.schedule-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.showing-label {
+  font-size: 0.82rem;
+  color: var(--gray);
+  font-weight: 600;
+}
+.showing-label strong { color: var(--green); }
+
+.table-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--light-border);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+/* Scrollbar styling */
+.table-wrap::-webkit-scrollbar { width: 6px; height: 6px; }
+.table-wrap::-webkit-scrollbar-track { background: var(--green-pale); }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 3px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: var(--white); min-width: 500px; }
+thead { position: sticky; top: 0; z-index: 2; }
+thead tr { background: var(--green); }
+th {
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+  color: var(--white);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  white-space: nowrap;
+}
+td { padding: 0.8rem 1.1rem; border-bottom: 1px solid #EEF7F0; color: var(--charcoal); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: var(--green-pale); }
+tr:hover td { background: #D4EDDA; transition: background 0.1s; }
+
+.sport-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.sport-cell { display: flex; align-items: center; }
+
+.badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.badge-home { background: #D4EDDA; color: #155724; }
+.badge-away { background: #FFF3CD; color: #856404; }
+.badge-tournament { background: #CCE5FF; color: #004085; }
+.badge-practice { background: #F0F0F0; color: #555; }
+.badge-tbd { background: #F8D7DA; color: #721c24; }
+
+.no-events {
+  padding: 3rem;
+  text-align: center;
+  color: var(--gray);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* INSTAGRAM */
+.instagram { background: var(--white); }
+.instagram-inner { max-width: 860px; margin: 0 auto; }
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.ig-card {
+  background: var(--green-pale);
+  border-radius: 8px;
+  padding: 1.25rem;
+  border-left: 4px solid var(--gold);
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.ig-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--green);
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 36px;
+}
+.ig-info {}
+.ig-date { font-size: 0.78rem; font-weight: 700; color: var(--gray); margin-bottom: 2px; }
+.ig-theme { font-size: 0.88rem; font-weight: 700; color: var(--charcoal); margin-bottom: 2px; }
+.ig-sports { font-size: 0.8rem; color: var(--green-mid); font-weight: 600; }
+
+/* CONTACT */
+.contact { background: var(--green); position: relative; overflow: hidden; }
+.contact::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(200,150,42,0.12) 0%, transparent 65%);
+  border-radius: 50%;
+}
+.contact .section-label { color: var(--gold-light); }
+.contact .section-title { color: var(--white); }
+.contact .divider { background: var(--gold); }
+.contact-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+.contact-intro {
+  color: rgba(255,255,255,0.72);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.contact-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 10px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: background 0.2s, transform 0.2s;
+}
+.contact-card:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
+.contact-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+.contact-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+  color: var(--gold-light);
+  margin-bottom: 0.5rem;
+}
+.contact-card a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.97rem;
+  display: block;
+  transition: color 0.2s;
+  font-weight: 600;
+}
+.contact-card a:hover { color: var(--gold-light); }
+
+/* FOOTER */
+footer {
+  background: #0a2910;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+.footer-logo {
+  width: 55px; height: 55px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem;
+}
+.footer-logo svg { width: 44px; height: 44px; }
+.footer-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--white);
+  letter-spacing: 3px;
+  margin-bottom: 0.4rem;
+}
+.footer-sub {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+  margin-bottom: 1.25rem;
+}
+.footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.footer-links a {
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold-light); }
+.footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.25); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .about-cards { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .stats-bar { gap: 1.5rem; }
+  .ig-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .hero-btns { flex-direction: column; align-items: center; }
+  section { padding: 3.5rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-logo-circle">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" fill="#1B6B2E"/>
+        <g fill="#C8962A">
+          <ellipse cx="50" cy="18" rx="16" ry="5"/>
+          <rect x="47" y="8" width="6" height="12" rx="3"/>
+          <rect x="40" y="10" width="5" height="10" rx="2.5"/>
+          <rect x="55" y="10" width="5" height="10" rx="2.5"/>
+        </g>
+        <path d="M28 45 Q28 22 50 22 Q72 22 72 45 L72 58 Q72 62 68 62 L32 62 Q28 62 28 58 Z" fill="#e8e8e8"/>
+        <path d="M35 55 L65 55 L65 62 Q65 70 58 72 L42 72 Q35 70 35 62 Z" fill="#cccccc"/>
+        <rect x="32" y="47" width="36" height="8" rx="4" fill="#1A1A1A"/>
+        <path d="M28 50 L35 50 L35 68 Q28 65 28 58 Z" fill="#d0d0d0"/>
+        <path d="M72 50 L65 50 L65 68 Q72 65 72 58 Z" fill="#d0d0d0"/>
+        <rect x="42" y="72" width="16" height="5" rx="2.5" fill="#bbbbbb"/>
+        <text x="50" y="95" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="10" font-weight="900" fill="#C8962A" letter-spacing="1">WS</text>
+      </svg>
+    </div>
+    <div class="nav-title">Spartan <span>Sports</span> Media</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="#about" onclick="this.closest('.mobile-menu').classList.remove('open')">About</a>
+  <a href="#schedule" onclick="this.closest('.mobile-menu').classList.remove('open')">Schedule</a>
+  <a href="#contact" onclick="this.closest('.mobile-menu').classList.remove('open')">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="#1B6B2E"/>
+      <g fill="#C8962A">
+        <ellipse cx="50" cy="18" rx="16" ry="5"/>
+        <rect x="47" y="8" width="6" height="12" rx="3"/>
+        <rect x="40" y="10" width="5" height="10" rx="2.5"/>
+        <rect x="55" y="10" width="5" height="10" rx="2.5"/>
+      </g>
+      <path d="M28 45 Q28 22 50 22 Q72 22 72 45 L72 58 Q72 62 68 62 L32 62 Q28 62 28 58 Z" fill="#e8e8e8"/>
+      <path d="M35 55 L65 55 L65 62 Q65 70 58 72 L42 72 Q35 70 35 62 Z" fill="#cccccc"/>
+      <rect x="32" y="47" width="36" height="8" rx="4" fill="#1A1A1A"/>
+      <path d="M28 50 L35 50 L35 68 Q28 65 28 58 Z" fill="#d0d0d0"/>
+      <path d="M72 50 L65 50 L65 68 Q72 65 72 58 Z" fill="#d0d0d0"/>
+      <rect x="42" y="72" width="16" height="5" rx="2.5" fill="#bbbbbb"/>
+      <text x="50" y="95" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="10" font-weight="900" fill="#C8962A" letter-spacing="1">WS</text>
+    </svg>
+  </div>
+  <p class="hero-eyebrow">White Station High School &middot; Memphis, TN</p>
+  <h1 class="hero-title">Spartan <span>Sports</span><br>Media</h1>
+  <p class="hero-subtitle">Professional Photography &middot; Spring 2026 Season Coverage</p>
+  <div class="hero-btns">
+    <a href="#schedule" class="btn-primary">View Spring Schedule</a>
+    <a href="#contact" class="btn-outline">Contact Us</a>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label">Sports Covered</div></div>
+  <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Events This Season</div></div>
+  <div class="stat"><div class="stat-num">901</div><div class="stat-label">Memphis Proud</div></div>
+  <div class="stat"><div class="stat-num">2026</div><div class="stat-label">Spring Season</div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <p class="section-label">Who We Are</p>
+    <h2 class="section-title">Capturing Every Moment</h2>
+    <div class="divider"></div>
+    <p class="about-body">Spartan Sports Media is a student-run media club at White Station High School delivering professional-level sports photography across all varsity programs. We capture the passion, dedication, and pride of Spartan athletics — from the first whistle to the final buzzer. Follow us on Instagram to see the best shots from every game.</p>
+    <div class="about-cards">
+      <div class="about-card">
+        <h3>Our Mission</h3>
+        <p>Provide high-quality photo coverage of every White Station sport, game after game, season after season.</p>
+      </div>
+      <div class="about-card">
+        <h3>Student Run</h3>
+        <p>A passionate group of student photographers committed to telling the Spartan story through every lens.</p>
+      </div>
+      <div class="about-card">
+        <h3>Spring 2026</h3>
+        <p>Covering Boys Rugby, Girls Rugby, Boys Soccer, Baseball, Tennis, and Track &amp; Field this season.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="schedule-inner">
+    <p class="section-label">Spring 2026 Season</p>
+    <h2 class="section-title">Game Schedule</h2>
+    <div class="divider"></div>
+
+    <p class="filter-label">Filter by Sport</p>
+    <div class="sport-tabs" id="tabs"></div>
+
+    <div class="schedule-header">
+      <p class="showing-label" id="showing-label">Showing all events</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Sport</th>
+            <th>Event / Opponent</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody id="sched-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Contact Us</h2>
+    <div class="divider"></div>
+    <p class="contact-intro">Want your game covered? Have questions about our photography? Reach out — we'd love to connect with the Spartan community.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">📱</div>
+        <h3>Call or Text</h3>
+        <a href="tel:9016430043">(901) 643-0043</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📸</div>
+        <h3>Instagram</h3>
+        <a href="https://instagram.com/spartansportsmedia_901" target="_blank">@spartansportsmedia_901</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#C8962A">
+        <ellipse cx="50" cy="18" rx="14" ry="4"/>
+        <rect x="48" y="9" width="4" height="10" rx="2"/>
+        <rect x="42" y="11" width="4" height="8" rx="2"/>
+        <rect x="54" y="11" width="4" height="8" rx="2"/>
+      </g>
+      <path d="M30 45 Q30 24 50 24 Q70 24 70 45 L70 58 Q70 61 67 61 L33 61 Q30 61 30 58 Z" fill="rgba(255,255,255,0.15)"/>
+      <rect x="33" y="47" width="34" height="7" rx="3.5" fill="rgba(255,255,255,0.4)"/>
+      <text x="50" y="82" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="9" font-weight="900" fill="rgba(200,150,42,0.8)" letter-spacing="1">WS</text>
+    </svg>
+  </div>
+  <div class="footer-name">Spartan Sports Media</div>
+  <div class="footer-sub">White Station High School &middot; Memphis, Tennessee</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#contact">Contact</a>
+    <a href="https://instagram.com/spartansportsmedia_901" target="_blank">Instagram</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Spartan Sports Media. Go Spartans!</div>
+</footer>
+
+<script>
+const SPORTS_META = {
+  "All Sports":    { color: "#1B6B2E", emoji: "🏆" },
+  "Boys Rugby":    { color: "#2E7D32", emoji: "🟢" },
+  "Girls Rugby":   { color: "#E91E8C", emoji: "🩷" },
+  "Boys Soccer":   { color: "#1565C0", emoji: "🔵" },
+  "Boys Baseball": { color: "#F9A825", emoji: "🟡" },
+  "Tennis":        { color: "#6A1B9A", emoji: "🟣" },
+  "Track & Field": { color: "#BF360C", emoji: "🔴" },
+};
+
+const ALL_EVENTS = [
+  // Boys Baseball
+  { date: "Mon, Mar 16", sortKey: "2026-03-16", sport: "Boys Baseball", event: "(V) 2:30 PM vs Munford", type: "HOME" },
+  { date: "Tue, Mar 17", sortKey: "2026-03-17", sport: "Boys Baseball", event: "(V) 12:00 PM vs Millington", type: "HOME" },
+  { date: "Wed, Mar 18", sortKey: "2026-03-18", sport: "Boys Baseball", event: "(V) 3:30 PM vs Southhaven", type: "HOME" },
+  { date: "Thu, Mar 19", sortKey: "2026-03-19", sport: "Boys Baseball", event: "(V) 4:30 PM @ West Memphis", type: "AWAY" },
+  { date: "Mon, Mar 23", sortKey: "2026-03-23", sport: "Boys Baseball", event: "(V) 4:30 PM vs Overton H.S.", type: "HOME" },
+  { date: "Wed, Mar 25", sortKey: "2026-03-25", sport: "Boys Baseball", event: "(V) 4:30 PM vs Central H.S.", type: "HOME" },
+  { date: "Mon, Mar 30", sortKey: "2026-03-30", sport: "Boys Baseball", event: "(V) 6:30 PM @ Lakeland", type: "AWAY" },
+  // Boys Soccer
+  { date: "Tue, Mar 17", sortKey: "2026-03-17", sport: "Boys Soccer", event: "(JV) 5:00 / (V) 6:30 vs Lausanne @ Wooddale", type: "AWAY" },
+  { date: "Tue, Mar 24", sortKey: "2026-03-24", sport: "Boys Soccer", event: "(V) 5:00 @ Rise Academy", type: "AWAY" },
+  { date: "Wed, Mar 25", sortKey: "2026-03-25", sport: "Boys Soccer", event: "(JV) 7:00 vs Munford @ Melrose", type: "AWAY" },
+  { date: "Fri, Mar 27", sortKey: "2026-03-27", sport: "Boys Soccer", event: "(JV/V) TBD vs Arlington @ Arlington", type: "AWAY" },
+  { date: "Wed, Apr 01", sortKey: "2026-04-01", sport: "Boys Soccer", event: "(JV) 5:00 / (V) 7:00 vs CBHS @ CBHS", type: "AWAY" },
+  { date: "Thu, Apr 02", sortKey: "2026-04-02", sport: "Boys Soccer", event: "(JV) 5:00 / (V) 6:30 vs Lakeland @ Lakeland", type: "AWAY" },
+  { date: "Tue, Apr 07", sortKey: "2026-04-07", sport: "Boys Soccer", event: "(V) 6:00 vs Briarcrest @ Briarcrest", type: "AWAY" },
+  { date: "Mon, Apr 13", sortKey: "2026-04-13", sport: "Boys Soccer", event: "(JV) 5:00 / (V) 7:00 vs Overton @ Halle", type: "AWAY" },
+  { date: "Mon, Apr 20", sortKey: "2026-04-20", sport: "Boys Soccer", event: "(V) 6:00 vs Southwind @ Melrose", type: "AWAY" },
+  { date: "Fri, Apr 24", sortKey: "2026-04-24", sport: "Boys Soccer", event: "(V) 5:00 vs Central @ Crump", type: "AWAY" },
+  { date: "Mon, Apr 27", sortKey: "2026-04-27", sport: "Boys Soccer", event: "(JV) 5:00 vs Briarcrest @ Briarcrest", type: "AWAY" },
+  { date: "Tue, Apr 28", sortKey: "2026-04-28", sport: "Boys Soccer", event: "(JV) 5:00 / (V) 7:00 vs Kingsbury @ Gaisman Park", type: "AWAY" },
+  // Boys Rugby
+  { date: "Thu, Mar 26", sortKey: "2026-03-26", sport: "Boys Rugby", event: "WS vs 901", type: "HOME" },
+  { date: "Tue, Apr 07", sortKey: "2026-04-07", sport: "Boys Rugby", event: "WS vs PCA", type: "HOME" },
+  { date: "Sat, Apr 11", sortKey: "2026-04-11", sport: "Boys Rugby", event: "WS vs Soulsville", type: "HOME" },
+  { date: "Sat, Apr 25", sortKey: "2026-04-25", sport: "Boys Rugby", event: "State Semi-Finals (Memphis)", type: "TOURNAMENT" },
+  { date: "Sat, May 02", sortKey: "2026-05-02", sport: "Boys Rugby", event: "State Championship", type: "TOURNAMENT" },
+  // Girls Rugby
+  { date: "Sat, Mar 28", sortKey: "2026-03-28", sport: "Girls Rugby", event: "vs FPA @ Tobey", type: "AWAY" },
+  { date: "Sat, Apr 11", sortKey: "2026-04-11", sport: "Girls Rugby", event: "vs Soulsville @ Tobey", type: "AWAY" },
+  { date: "Sat, May 23", sortKey: "2026-05-23", sport: "Girls Rugby", event: "End of Year Awards/Party (TBD)", type: "TBD" },
+  // Tennis
+  { date: "Tue, Mar 17", sortKey: "2026-03-17", sport: "Tennis", event: "Practice — Leftwich (Courts 1-6 South) 10:00 AM–12:00 PM", type: "PRACTICE" },
+  { date: "Tue, Mar 24", sortKey: "2026-03-24", sport: "Tennis", event: "Practice — Leftwich (Courts 1-6 North) 2:30–4:00 PM", type: "PRACTICE" },
+  { date: "Thu, Mar 26", sortKey: "2026-03-26", sport: "Tennis", event: "vs CBHS/SAA — Leftwich (Courts 7-12 North) 4:00–6:00 PM", type: "HOME" },
+  { date: "Fri, Mar 27", sortKey: "2026-03-27", sport: "Tennis", event: "Challenge Matches — Leftwich (Courts 7-12 South) 3:00–5:00 PM", type: "HOME" },
+  { date: "Tue, Mar 31", sortKey: "2026-03-31", sport: "Tennis", event: "vs MUS/Hutchison — MUS (Courts 1-8) 4:00–6:00 PM", type: "AWAY" },
+  { date: "Wed, Apr 01", sortKey: "2026-04-01", sport: "Tennis", event: "vs Whitehaven — Eldon Roark (Courts 1-8) 3:30–6:00 PM", type: "AWAY" },
+  { date: "Thu, Apr 02", sortKey: "2026-04-02", sport: "Tennis", event: "vs Arlington — Wolbrecht (Courts 4-8) 3:30–6:00 PM", type: "AWAY" },
+  { date: "Fri, Apr 03", sortKey: "2026-04-03", sport: "Tennis", event: "Challenge Matches — Leftwich (Courts 5-6, 11-12 South) 3:00–5:00 PM", type: "HOME" },
+  { date: "Tue, Apr 07", sortKey: "2026-04-07", sport: "Tennis", event: "vs Collierville — Collierville (Courts 1-6) 3:30–6:00 PM", type: "AWAY" },
+  { date: "Wed, Apr 08", sortKey: "2026-04-08", sport: "Tennis", event: "vs University High — Leftwich (Courts 7-12 North) 3:30–6:00 PM", type: "HOME" },
+  { date: "Thu, Apr 09", sortKey: "2026-04-09", sport: "Tennis", event: "Practice — Leftwich (Courts 3-6 North, 5-6 South) 3:00–5:00 PM", type: "PRACTICE" },
+  { date: "Mon, Apr 13", sortKey: "2026-04-13", sport: "Tennis", event: "vs Central — Leftwich (Courts 1-6 North) 3:30–6:00 PM", type: "HOME" },
+  { date: "Tue, Apr 14", sortKey: "2026-04-14", sport: "Tennis", event: "vs Briarcrest — Briarcrest (Courts 1-6) 3:30–6:00 PM", type: "AWAY" },
+  // Track & Field
+  { date: "Fri, Mar 20", sortKey: "2026-03-20", sport: "Track & Field", event: "Jack Moran Relays @ CBHS — 5:00 PM", type: "AWAY" },
+  { date: "Sat, Mar 21", sortKey: "2026-03-21", sport: "Track & Field", event: "Jack Moran Relays @ CBHS — 10:00 AM", type: "AWAY" },
+  { date: "Fri, Mar 27", sortKey: "2026-03-27", sport: "Track & Field", event: "Panther Relays @ Bartlett HS — 5:00 PM", type: "AWAY" },
+  { date: "Sat, Mar 28", sortKey: "2026-03-28", sport: "Track & Field", event: "Panther Relays @ Bartlett HS — 10:00 AM", type: "AWAY" },
+  { date: "Tue, Apr 07", sortKey: "2026-04-07", sport: "Track & Field", event: "Bartlett Home Meet @ Bartlett HS — 5:00 PM", type: "AWAY" },
+  { date: "Fri, Apr 10", sortKey: "2026-04-10", sport: "Track & Field", event: "Houston Track Classic @ Houston HS — 4:00 PM", type: "AWAY" },
+  { date: "Sat, Apr 11", sortKey: "2026-04-11", sport: "Track & Field", event: "Houston Track Classic @ Houston HS — 9:00 AM", type: "AWAY" },
+  { date: "Mon, Apr 13", sortKey: "2026-04-13", sport: "Track & Field", event: "Section 4 AAA Pentathlon/Decathlon @ Halle Stadium — 10:00 AM", type: "TOURNAMENT" },
+  { date: "Tue, Apr 14", sortKey: "2026-04-14", sport: "Track & Field", event: "Section 4 AAA Pentathlon/Decathlon @ Halle Stadium — 10:00 AM", type: "TOURNAMENT" },
+  { date: "Wed, Apr 15", sortKey: "2026-04-15", sport: "Track & Field", event: "MSCIAA Championship Prelims @ Halle Stadium — 5:00 PM", type: "TOURNAMENT" },
+  { date: "Thu, Apr 16", sortKey: "2026-04-16", sport: "Track & Field", event: "MSCIAA Championship Prelims @ Halle Stadium — 5:00 PM", type: "TOURNAMENT" },
+  { date: "Sat, Apr 18", sortKey: "2026-04-18", sport: "Track & Field", event: "MSCIAA Championship Running Finals @ Halle Stadium — 10:00 AM", type: "TOURNAMENT" },
+  { date: "Fri, Apr 24", sortKey: "2026-04-24", sport: "Track & Field", event: "Last Chance Meet @ Bartlett HS — 5:00 PM", type: "AWAY" },
+  { date: "Sat, May 02", sortKey: "2026-05-02", sport: "Track & Field", event: "Section 4 AAA Sub-Sectional @ TBD", type: "TOURNAMENT" },
+  { date: "Sat, May 09", sortKey: "2026-05-09", sport: "Track & Field", event: "Section 4 AAA Championship @ Houston HS — 10:00 AM", type: "TOURNAMENT" },
+  { date: "Thu, May 14", sortKey: "2026-05-14", sport: "Track & Field", event: "State Pentathlon/Decathlon @ UTK — 10:00 AM", type: "TOURNAMENT" },
+  { date: "Fri, May 15", sortKey: "2026-05-15", sport: "Track & Field", event: "State Pentathlon/Decathlon @ UTK — 10:00 AM", type: "TOURNAMENT" },
+  { date: "Thu, May 21", sortKey: "2026-05-21", sport: "Track & Field", event: "State Championships @ UTK — 4:00 PM", type: "TOURNAMENT" },
+];
+
+ALL_EVENTS.sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+
+let activeFilter = "All Sports";
+
+function badgeHTML(type) {
+  const map = {
+    HOME: '<span class="badge badge-home">HOME</span>',
+    AWAY: '<span class="badge badge-away">AWAY</span>',
+    TOURNAMENT: '<span class="badge badge-tournament">TOURNAMENT</span>',
+    PRACTICE: '<span class="badge badge-practice">PRACTICE</span>',
+    TBD: '<span class="badge badge-tbd">TBD</span>',
+  };
+  return map[type] || `<span class="badge badge-practice">${type}</span>`;
+}
+
+function render() {
+  const filtered = activeFilter === "All Sports"
+    ? ALL_EVENTS
+    : ALL_EVENTS.filter(e => e.sport === activeFilter);
+
+  const label = document.getElementById('showing-label');
+  if (activeFilter === "All Sports") {
+    label.innerHTML = `Showing <strong>all ${filtered.length} events</strong> across all sports`;
+  } else {
+    const meta = SPORTS_META[activeFilter];
+    label.innerHTML = `${meta.emoji} Showing <strong>${filtered.length} events</strong> for <strong style="color:${meta.color}">${activeFilter}</strong>`;
+  }
+
+  const body = document.getElementById('sched-body');
+  if (!filtered.length) {
+    body.innerHTML = '<tr><td colspan="4" class="no-events">No events scheduled for this sport yet.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = filtered.map(e => {
+    const meta = SPORTS_META[e.sport] || { color: "#555" };
+    return `<tr>
+      <td><strong>${e.date}</strong></td>
+      <td>
+        <div class="sport-cell">
+          <span class="sport-dot" style="background:${meta.color}"></span>
+          <span style="font-size:0.85rem;color:#555;font-weight:600;">${e.sport}</span>
+        </div>
+      </td>
+      <td>${e.event}</td>
+      <td>${badgeHTML(e.type)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function buildTabs() {
+  const container = document.getElementById('tabs');
+  const counts = {};
+  ALL_EVENTS.forEach(e => { counts[e.sport] = (counts[e.sport] || 0) + 1; });
+
+  Object.keys(SPORTS_META).forEach(sport => {
+    const count = sport === "All Sports" ? ALL_EVENTS.length : (counts[sport] || 0);
+    const meta = SPORTS_META[sport];
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (sport === activeFilter ? ' active' : '');
+    btn.innerHTML = `${meta.emoji} ${sport} <span class="tab-count">${count}</span>`;
+    btn.onclick = () => {
+      activeFilter = sport;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    };
+    container.appendChild(btn);
+  });
+}
+
+buildTabs();
+render();
+</script>
+</body>
+</html>
